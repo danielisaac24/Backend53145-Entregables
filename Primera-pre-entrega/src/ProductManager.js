@@ -1,23 +1,22 @@
 import fs from 'fs';
 class ProductManager {
     constructor() {
-        // this.nextId = 1;
-        this.path = "./src/datos.json";
+        this.path = "./src/product.json";
+        this.status= true;
     }
 
-    async addProduct(title, description, price, thumbnail, code, stock) {
+    async addProduct(title, description, price, thumbnail, code, stock, category) {
         try {
             let products = await this.getProducts(); 
-   
-            if (!title || !description || !price || !code || !stock) {
-                console.log("Faltan completar campos"); 
-                return;
-            }
+            // if (!title || !description || !price || !code || !stock || !category) {
+            //     console.log("Faltan completar campos"); 
+            //     return;
+            // }
             if (products.some(product => product.code === code)) { 
                 console.log("El código del producto ya existe.");
                 return;
             }
- 
+
 
             const product = {
                 id: products.length + 1, 
@@ -27,6 +26,8 @@ class ProductManager {
                 thumbnail: thumbnail,
                 code: code,
                 stock: stock,
+                status: this.status,
+                category: category
             };
             products.push(product); 
 
@@ -96,4 +97,9 @@ class ProductManager {
     }
 }
 export default ProductManager;
+
+
+
+
+
 

@@ -2,7 +2,7 @@ import { Router } from 'express'
 import ProductManager from '../ProductManager.js';
 const router = Router()
 const Manager = new ProductManager();
-console.log(Manager.path)
+
 // definiendo los distos métodos de crud de productos
 router.get('/', async (req, res) => {
     try {
@@ -30,18 +30,18 @@ router.get('/:pid', async (req, res) => {
         } else {
             res.send(error);
         }
-        
+
     } catch (error) {
         console.error(error);
         res.send('No existe ese ID');
     }
 });
 router.post('/', async (req, res) => {
-    const {title, description, price, thumbail, code, stock} = req.body
+    const { title, description, price, thumbail, code, stock } = req.body
     try {
         Manager.addProduct(title, description, price, thumbail, code, stock)
-        res.status(200).send({ status: 'success1'})  
-        
+        res.status(200).send({ status: 'success1' })
+
     } catch (error) {
         console.error(error)
     }
@@ -54,18 +54,17 @@ router.put('/:pid', async (req, res) => {
     try {
         Manager.updateProduct(pid, productToUpdate);
         console.log(Manager.updateProduct.products)
-        res.status(200).send({ status: 'success update'})   
+        res.status(200).send({ status: 'success update' })
     } catch (error) {
-        console.error(error) 
+        console.error(error)
     }
 })
 
-router.delete('/', async (req, res) => {
-    const {title, description, price, thumbail, code, stock} = req.body
+router.delete('/:pid', async (req, res) => {
+    const { pid } = req.params
     try {
-        Manager.addProduct(title, description, price, thumbail, code, stock)
-        res.status(200).send({ status: 'success1'})  
-        
+        Manager.deleteProduct(parseInt(pid))
+        res.send({ status: 'success delete' })
     } catch (error) {
         console.error(error)
     }
