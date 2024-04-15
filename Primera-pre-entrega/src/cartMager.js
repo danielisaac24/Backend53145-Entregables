@@ -20,14 +20,16 @@ class CartManager {
             const cart = carts.find(cart => cart.id === parseInt(cid));
         console.log(cart)
             let productIndex = cart.product.findIndex(product => product.id === pid);
-            console.log(productIndex);
+
             if (productIndex !== -1) {
                 // Si el producto ya existe en el carrito, incrementar la cantidad
-                cart.products[productIndex].quantity += quantity;
+                cart.product[productIndex].quantity += quantity;
             } else {
                 // Si el producto no existe en el carrito, agregarlo
-                cart.products.push({ id: pid, quantity });
+                cart.product.push({ id: pid, quantity });
+                
             }
+
             carts[cid] = { ...carts[cid], ...productIndex };
             await fs.promises.writeFile('./src/carts.json', JSON.stringify(carts, null, "\t"), "utf-8");
             return carts;
