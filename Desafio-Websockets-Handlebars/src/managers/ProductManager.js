@@ -1,8 +1,8 @@
 import fs from 'fs';
-import  __dirname  from './utils.js'
+import  __dirname  from '../utils.js'
 class ProductManager {
     constructor() {
-        this.path = __dirname+'/datos.json';
+        this.path = './src/file/datos.json';
         this.status= true;
     }
 

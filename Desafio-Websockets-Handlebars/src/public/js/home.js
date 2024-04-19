@@ -1,24 +1,48 @@
-import ProductManager from '../../managers/ProductManager.js'
+// const socket = io();
+// fetch("http://localhost:8080/api/products")
+//     .then((res) => res.json())
+//     .then((products) => socket.emit("readProducts", products));
 
-const socket = io()
-const Manager = new ProductManager();
-let products = await Manager.getProducts()
+// socket.on("listProducts", (data) => {
+//     //console.log('Mensajes del server', data)
+//     let log = document.getElementById("listProduct");
 
-    // const products = [
-    //     {id: '1', title: 'producto 1', precio: '100'},
-    //     {id: '2', title: 'producto 2', precio: '101'},
-    //     {id: '3', title: 'producto 3', precio: '102'},
-    //     {id: '4', title: 'producto 4', precio: '103'},
-    //     {id: '5', title: 'producto 5', precio: '104'}    
-    // ]
-    socket.emit('message', products)
-    socket.on('messageLogs', data => {
-        //console.log('Mensajes del server', data)
-        let log = document.getElementById('messageLog')
+//     let products = "";
+//     data.forEach((product) => {
+//         products += `<li>${product.id}${product.title}${product.price}</li><br>`;
+//     });
+//     log.innerHTML = products;
+// });
+const socket = io();
 
-        let messages = ''
-        data.forEach(message => {
-            messages += `<li>${message.id}${message.title}${message.precio}</li><br>`
+function fetchProducts() {
+    fetch("http://localhost:8080/api/products")
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error("Error al obtener los productos");
+            }
+            return res.json();
         })
-        log.innerHTML = messages
-    })
+        .then((products) => {
+            updateProductList(products);
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+}
+
+function updateProductList(data) {
+    let productList = document.getElementById("listProduct");
+
+    let productsHTML = data.map((product) => {
+        return `<li>${product.id} ${product.title} ${product.price}</li>`;
+    }).join('');
+
+    productList.innerHTML = productsHTML;
+}
+
+socket.on("listProducts", (data) => {
+    updateProductList(data);
+});
+
+fetchProducts();
