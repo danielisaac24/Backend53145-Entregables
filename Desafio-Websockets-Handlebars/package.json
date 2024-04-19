@@ -8,7 +8,7 @@
     "start:dev": "node --watch src/app.js",
     "dev": "nodemon src/app.js"
   },
-  "type" : "module",
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
