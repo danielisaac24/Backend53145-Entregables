@@ -1,5 +1,4 @@
 import express from 'express'
-
 const router = express.Router()
 
 router.get('/', (req, res)=>{
@@ -8,9 +7,24 @@ router.get('/', (req, res)=>{
         styles: 'homeStyles.css'
     })
 })
-router.get('/realtimeproducts', (req, res)=>{
-    res.render('realtimeproduts', {
 
+// router.get('/realtimeproducts', async (req, res) => {
+// 	//Pedimos a nuestro propio servidor los libros.
+// 	const response = await fetch('http://localhost:8080/realtimeproducts');
+
+// 	//El endpoint responde
+// 	const data = await response.json();
+
+// 	//Mandamos el handlebars con informacion
+// 	res.render('realtimeproducts', {
+// 		books: data.payload,
+// 	});
+// });
+
+router.get('/realtimeproducts', (req, res)=>{
+
+    res.render('realtimeproducts', {
+        styles: 'homeStyles.css'
     })
 })
 

@@ -9,7 +9,7 @@ import { Server } from 'socket.io'
 const app = express();
 const PORT = process.env.PORT || 8080
 const httpServer = app.listen (PORT, ()=>console.log('escuchando el port 8080'));
-const socketServer = new Server(httpServer)
+const io = new Server(httpServer)
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -23,6 +23,7 @@ app.engine('hbs', handlebars.engine({
 app.set('views', __dirname+'/views')
 app.set('view engine', 'hbs')
 app.use('/', viewsRouter)
+app.use('/realtimeProduct', viewsRouter)
 app.use('/api/products', productRouter)
 
 app.use((error, req, res, next) => {
@@ -30,15 +31,19 @@ app.use((error, req, res, next) => {
     res.status(500).send('Error 500 en el server')
 })
 
-socketServer.on('connection', socket => {
-    console.log('Cliente conectado')
-
-    socket.on('readProducts', data => {
-        console.log('productos: ', data)
-        // emitimos los productos
-        socketServer.emit('listProducts', data)
+function comunicacionSocket(io){
+    io.on('connection', socket => {
+        console.log('Cliente conectado')
+    
+        socket.on('readProducts', data => {
+            console.log('productos desde cliente: ', data)
+            // emitimos los productos
+            io.emit('listProducts', data)
+        })
     })
-})
+}
+comunicacionSocket(io)
+
 
 
 // 
