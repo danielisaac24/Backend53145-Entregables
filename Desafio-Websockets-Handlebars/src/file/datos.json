@@ -10,29 +10,47 @@
 	},
 	{
 		"id": 2,
-		"title": "Producto 2",
-		"description": "Este es un producto de prueba",
-		"price": 400,
-		"code": "abc123",
-		"stock": 25,
+		"title": "eee",
+		"description": "eee",
+		"price": "3",
+		"code": "ee",
+		"stock": "3",
 		"status": true
 	},
 	{
 		"id": 3,
-		"title": "Producto 2",
-		"description": "Este es un producto de prueba",
-		"price": 400,
-		"code": "abc1234",
-		"stock": 25,
+		"title": "Producto Front",
+		"description": "desde el form del front",
+		"price": "123",
+		"code": "jfbskjfb",
+		"stock": "200",
 		"status": true
 	},
 	{
 		"id": 4,
-		"title": "Producto 2",
-		"description": "Este es un producto de prueba",
-		"price": 400,
-		"code": "abc12345",
-		"stock": 25,
+		"title": "Producto Front",
+		"description": "desde el form del front",
+		"price": "123",
+		"code": "567",
+		"stock": "201",
+		"status": true
+	},
+	{
+		"id": 5,
+		"title": "mouse",
+		"description": "gamer",
+		"price": "1234",
+		"code": "56777",
+		"stock": "22",
+		"status": true
+	},
+	{
+		"id": 6,
+		"title": "mouse",
+		"description": "gamer",
+		"price": "1234",
+		"code": "567776",
+		"stock": "22",
 		"status": true
 	}
 ]
